@@ -8,10 +8,10 @@ namespace gl {
 class Buffer {
 public:
     Buffer() {
-        glGenBuffers(1, &_id);
+        ::glGenBuffers(1, &_id);
     }
     ~Buffer() {
-        glDeleteBuffers(1, &_id);
+        ::glDeleteBuffers(1, &_id);
     }
     Buffer(const Buffer&) = delete;
     Buffer& operator=(const Buffer&) = delete;
@@ -27,10 +27,10 @@ private:
 class VAO {
 public:
     VAO() {
-        glGenVertexArrays(1, &_id);
+        ::glGenVertexArrays(1, &_id);
     }
     ~VAO() {
-        glDeleteVertexArrays(1, &_id);
+        ::glDeleteVertexArrays(1, &_id);
     }
     VAO(const VAO&) = delete;
     VAO& operator=(const VAO&) = delete;
@@ -40,9 +40,9 @@ public:
     }
     inline void attributes(::GLuint index, ::GLint size, ::GLenum type,
         ::GLboolean norm, ::GLsizei stride, std::size_t offset) const noexcept {
-        glVertexAttribPointer(index, size, type,
+        ::glVertexAttribPointer(index, size, type,
             norm, stride, reinterpret_cast<void*>(offset));
-        glEnableVertexAttribArray(index);
+        ::glEnableVertexAttribArray(index);
     }
 
 private:

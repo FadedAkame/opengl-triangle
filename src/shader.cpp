@@ -29,7 +29,7 @@ static ::GLuint compile_shader(const char* shader_glsl, ::GLenum type) {
     int success { };
     char info_log[512] { };
 
-    ::GLuint shader { glCreateShader(type) };
+    ::GLuint shader { ::glCreateShader(type) };
     ::glShaderSource(shader, 1, &shader_glsl, nullptr);
     ::glCompileShader(shader);
     ::glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
@@ -55,7 +55,7 @@ ShaderProgram::ShaderProgram(std::filesystem::path vertex_path,
     int success { };
     char info_log[512] { };
 
-    _id = glCreateProgram();
+    _id = ::glCreateProgram();
     ::glAttachShader(_id, vertex_shader);
     ::glAttachShader(_id, fragment_shader);
     ::glLinkProgram(_id);
@@ -66,15 +66,15 @@ ShaderProgram::ShaderProgram(std::filesystem::path vertex_path,
         std::exit(EXIT_FAILURE);
     }
 
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    ::glDeleteShader(vertex_shader);
+    ::glDeleteShader(fragment_shader);
 }
 ShaderProgram::~ShaderProgram() {
-    glDeleteProgram(_id);
+    ::glDeleteProgram(_id);
 }
 
 void ShaderProgram::use() const noexcept {
-    glUseProgram(_id);
+    ::glUseProgram(_id);
 }
 
 }

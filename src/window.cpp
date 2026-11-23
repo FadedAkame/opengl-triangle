@@ -29,7 +29,7 @@ Window::Window(std::uint16_t width, std::uint16_t height,
         std::exit(EXIT_FAILURE);
     }
 
-    glViewport(0, 0, width, height);
+    ::glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(_window, resize_fn);
 }
 Window::~Window() {
